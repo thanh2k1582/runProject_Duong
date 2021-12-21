@@ -1,0 +1,63 @@
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        {{!-- <div class="card shadow-2-strong card-registration" style="border-radius: 15px;"> --}}
+          <div class="card-body p-4 p-md-5">
+           <div class="global-container">
+    <div class="card login-form">
+        <div class="card-body">
+          <img src="image/logo.PNG" style="margin-left:170px">
+            <h3 class="card-title text-center">Đăng nhập</h3>
+            <div class="card-text">
+                <!--
+            <div class="alert alert-danger alert-dismissible fade show" 
+             role="alert">Incorrect username or password.</div> -->
+                <form method="POST" action="login/submit" id="formLogin">
+                    <!-- to error: add class "has-danger" -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tài khoản</label>
+                        <input type="text" class="form-control form-control-sm"
+                    id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mật khẩu</label>
+                        <a href="/reset" style="float:right;font-size:12px;">Quên mật khẩu</a>
+                        <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" name="password">
+                    </div>
+                     <div class="row">
+              </div>
+              <a >
+                      <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+              </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  $("#formLogin").validate({
+    rules: {
+        email:{
+          required: true,
+        },
+        password:{
+          required: true,
+        }
+    },
+    messages:{
+        email:{
+          required: "Email đang trống , vui lòng nhập",
+        },
+        password:{
+          required: "Password trống , vui lòng nhập",
+        }
+    }
+  })
+</script>

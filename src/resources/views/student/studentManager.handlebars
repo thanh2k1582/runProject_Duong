@@ -1,0 +1,129 @@
+{{>silderBarSV_GV}}
+<div class="main-content">
+  {{>header}}
+  <main>
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Phòng đăng ký</th>
+      <th scope="col">Máy đăng ký</th>
+      <th scope="col">Ngày đăng ký</th>
+      <th scope="col">Ngày sử dụng</th>
+      <th scope="col">Từ tiết</th>
+      <th scope="col">Đến tiết</th>
+      <th scope="col">Tình trạng</th>
+      <th scope="col" colspan="2" class="text-center">Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each member}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.phongDk}}</td>
+      <td>{{this.mayDk}}</td>
+      <td>{{this.createdAt}}</td>
+      <td>{{this.ngaySd}}</td>
+      <td>{{this.tuTiet}}</td>
+      <td>{{this.denTiet}}</td>
+      <td>{{this.tinhTrang}}</td>
+      <td><a href="#"><button type="button" class="btn btn-dark" data-target="#baocaoModal" data-toggle="modal" data-id="{{this._id}}">Báo cáo</button></a></td>
+      <td><a href="student/{{this._id}}/edit"><button type="button" class="btn btn-dark">Sửa</button></a></td>
+      <td><button type="button" class="btn btn-dark" data-target="#exampleModal" data-toggle="modal" data-id="{{this._id}}">Xóa</button></td>
+    </tr>
+    {{/each}}
+  </tbody>
+      </table>
+<a  class="btn btn-primary" href="/student/newRegister">Đăng ký mới</a>
+  </main>
+</div>
+
+
+{{!-- modal xóa--}}
+<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xóa đăng ký</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn xóa đăng ký</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"  id="btn-delete">Xóa</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" >Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- end modal --}}
+{{!-- modal Báo cáo --}}
+<form method="POST" name="reportForm">
+    <div class="modal" tabindex="-1" role="dialog" id="baocaoModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Báo cáo vấn đề</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="md-form">
+              <label for="form7">Chọn và ghi rõ vấn đề bạn muốn báo cáo</label>
+              <select class="browser-default custom-select" name="selectReport">
+                  <option selected >Chọn vấn đề </option>
+                  <option value="Phòng">Phòng </option>
+                  <option value="Máy">Máy </option>
+                  <option value="Phần mềm">Phần mềm</option>
+                  <option value="Internet">Internet</option>
+                  <option value="Khác">Khác</option>
+              </select>
+              <textarea id="form7" class="md-textarea form-control mt-2" rows="3" name="textareareport"></textarea>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"  id="btnReport">Báo cáo</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" >Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+{{!-- end modal báo cáo --}}
+<form  method="POST" name="deleteForm"></form>
+<script>
+  document.addEventListener("DOMContentLoaded",function(){
+      var memberId;
+      $('#exampleModal').on('show.bs.modal', function (event) {
+             var button = $(event.relatedTarget)
+             memberId= button.data('id') 
+       })
+      var deleteForm = document.forms['deleteForm'];
+      var btnDelete = document.getElementById('btn-delete');
+      btnDelete.onclick = function(){
+          deleteForm.action = '/student/'+memberId+'/delete'
+          deleteForm.submit();
+      }
+
+      var reportId;
+      $('#baocaoModal').on('show.bs.modal', function (event) {
+             var button = $(event.relatedTarget)
+             reportId= button.data('id') 
+       })
+      var reportForm = document.forms['reportForm'];
+      var btnReport = document.getElementById('btnReport');
+      console.log(btnReport)
+      btnReport.onclick = function(){
+          reportForm.action = '/student/'+reportId+'/report'
+          reportForm.submit();
+          alert("Xin cảm ơn bạn đã phản hồi")
+      }
+  })
+
+
+</script>

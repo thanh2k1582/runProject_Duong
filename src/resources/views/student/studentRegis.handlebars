@@ -1,0 +1,81 @@
+{{>silderBarSV_GV}}
+<div class="main-content">
+  {{>header}}
+  <main>
+     <div class="containerLogin" style="position:absolute;top:-100px;left:40px" >
+  <div class="col-2 mt-4 ">
+    <form method="POST" >
+      <div style="display:flex;width:800px">
+        <div>
+              <select class="browser-default custom-select" name="phongDk">
+                <option selected>Chọn phòng </option>
+                <option value="B101">B101</option>
+                <option value="B102">B102</option>
+                <option value="B103">B103</option>
+                <option value="B104">B104</option>
+                <option value="B201">B201</option>
+                <option value="B202">B202</option>
+                <option value="B203">B203</option>
+                <option value="B204">B204</option>
+                <option value="B301">B301</option>
+                <option value="B302">B302</option>
+                <option value="B303">B303</option>
+                <option value="B304">B304</option>
+              </select>
+              <select class="browser-default custom-select mt-4" name="mayDk">
+                <option selected>Chọn máy</option>
+                <option value="Máy 1" >Máy 1</option>
+                <option value="Máy 2">Máy 2</option>
+                <option value="Máy 3">Máy 3</option>
+                <option value="Máy 4">Máy 4</option>
+                <option value="Máy 5">Máy 5</option>
+                <option value="Máy 6">Máy 6</option>
+                <option value="Máy 7">Máy 7</option>
+                <option value="Máy 8">Máy 8</option>
+                <option value="Máy 9">Máy 9</option>
+                <option value="Máy 10">Máy 10</option>
+              </select>
+        </div>
+        <div style="margin-left:40px">
+              <select class="browser-default custom-select mt-4" name="tuTiet" style="margin-top:0px !important">
+                <option selected>Từ tiết</option>
+                <option value="1">Tiết 1</option>
+                <option value="2">Tiết 2</option>
+                <option value="3">Tiết 3</option>
+                <option value="3">Tiết 4</option>
+                <option value="3">Tiết 5</option>
+                <option value="3">Tiết 6</option>
+                <option value="3">Tiết 7</option>
+                <option value="3">Tiết 8</option>
+                <option value="3">Tiết 9</option>
+              </select>
+              <select class="browser-default custom-select mt-4" name="denTiet">
+                <option selected>Đến tiết</option>
+                <option value="2">Tiết 2</option>
+                <option value="3">Tiết 3</option>
+                <option value="3">Tiết 4</option>
+                <option value="3">Tiết 5</option>
+                <option value="3">Tiết 6</option>
+                <option value="3">Tiết 7</option>
+                <option value="3">Tiết 8</option>
+                <option value="3">Tiết 9</option>
+                <option value="3">Tiết 10</option>
+              </select>
+        </div>
+      </div>
+        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker mt-4">
+          <input placeholder="Ngày sử dụng" type="text" id="example" class="form-control mb-4" name="ngaySd" style="width:268px">
+          <i class="fas fa-calendar input-prefix" tabindex=0></i>
+        </div>
+        <a href="taoMoi">
+          <button type="submit" class="btn btn-primary ml-4" href="/student/newRegister">Đăng ký</button>
+        </a>
+    </form>
+  </div>
+</div>
+  </main>
+</div>
+
+<script>
+  $('.datepicker').datepicker();
+</script>

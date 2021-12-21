@@ -1,0 +1,36 @@
+
+{{>silderBar}}
+<div class="main-content">
+  {{>headerAdmin}}
+  <main>
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Mã sinh viên</th>
+      <th scope="col">Tên sinh viên</th>
+      <th scope="col">Thời gian báo cáo</th>
+      <th scope="col">Nội dung báo cáo</th>
+      <th scope="col" colspan="2" >Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each members}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.mssv}}</td>
+      <td>{{this.phongDk}}</td>
+      <td> ngày {{this.ngaySd}} từ {{this.tuTiet}} đến {{this.denTiet}}</td>
+      <td>{{this.selectReport}} - {{this.textareareport}}</td>
+      <td >
+      <a href="/admin/reportStudentManager/{{this._id}}">
+        <button type="button" class="btn btn-secondary mr-" data-toggle="modal" data-target="#exampleModalCenter" data-id="{{this._id}}"
+        >Xem chi tiết</button>
+      </a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+  </main>
+</div>

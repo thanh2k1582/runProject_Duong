@@ -1,0 +1,174 @@
+{{>silderBar}}
+<div class="main-content">
+  {{>headerAdmin}}
+  <main>
+     <section class="vh-100 gradient-custom" style="position:absolute;width:100%;top:60px;left:0px">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <form method="POST" action="/register/new" id="formRegister">
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <label class="form-label" for="firstName">Tên</label>
+                    <input type="text" id="firstName" class="form-control form-control-lg" name="ten"/>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <label class="form-label" for="lastName">Tên đệm</label>
+                    <input type="text" id="lastName" class="form-control form-control-lg" name="ho"/>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                  <div class="form-outline datepicker w-100">
+                    <label for="birthdayDate" class="form-label">Ngày sinh</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="birthdayDate"
+                      name="ngaySinh"
+                    />
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4 mt-4">
+
+                  <h6 class="mb-2 pb-1">Giới tính: </h6>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="maleGender"
+                      value="option2"
+                      checked
+                      name="gioiTinh"
+                    />
+                    <label class="form-check-label" for="maleGender">Nam</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="femaleGender"
+                      value="option1"
+                      name="gioiTinh"
+                    />
+                    <label class="form-check-label" for="femaleGender">Nữ</label>
+                  </div>
+
+                  
+
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="otherGender"
+                      value="option3"
+                      name="gioiTinh"
+                    />
+                    <label class="form-check-label" for="otherGender">Khác</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <label class="form-label" for="emailAddress">Mã số Giảng Viên/Sinh viên</label>
+                    <input type="text" id="emailAddress" class="form-control form-control-lg" name="email"/>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <label class="form-label" for="phoneNumber">Mật khẩu</label>
+                  <input type="password" class="form-control form-control-lg" name="mk">
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+
+                  <select class="select form-control-lg mr-2" name="chucvu">
+                    <option value="3">Giảng viên</option>
+                    <option value="4">Sinh viên</option>
+                  </select>
+                  <label class="form-label select-label">Chọn chức năng của bạn</label>
+
+                </div>
+              </div>
+
+              <div class="mt-4 pt-2">
+                <input class="btn btn-primary btn-lg" type="submit" value="Đăng ký" />
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+</div>
+
+
+
+<script>
+ $("#formRegister").validate({
+    rules: {
+        ten:{
+          required: true,
+        },
+        ho:{
+          required: true,
+        },
+        ngaySinh:{
+          required: true,
+        },
+        email:{
+          required: true
+        },
+        mk:{
+          required: true
+        }
+    },
+    messages: {
+        ten:{
+          required: "Vui lòng nhập tên",
+        },
+        ho:{
+          required: "Vui lòng nhập họ",
+        },
+        ngaySinh:{
+          required: "Vui lòng nhập ngày sinh",
+        },
+        email:{
+          required: "Vui lòng nhập email"
+        },
+        mk:{
+          required: "Vui lòng nhập mật khậu"
+        }
+    }
+  })
+</script>

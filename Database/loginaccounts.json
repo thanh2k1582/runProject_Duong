@@ -1,0 +1,65 @@
+[{
+  "_id": "Wr_9J4Fuj",
+  "email": "admin2",
+  "mk": "$2b$10$n/8Lc3IyNR.3FARkhsLQxOu5toK72QQAGug.1GspnONTAT6jPlKA.",
+  "ten": "thanh",
+  "ho": "nguyen",
+  "ngaySinh": "15/08/2000",
+  "gioiTinh": "nam",
+  "chucvu": "2",
+  "createdAt": {
+    "$date": "2021-12-08T14:09:46.650Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-08T14:09:46.650Z"
+  },
+  "__v": 0
+},{
+  "_id": "6VSw4lIAj",
+  "email": "student",
+  "mk": "$2b$10$VF3f5.jwXnzeTaPxbtYTJeGiS9M5nYoJsATFt4m4p/7.ngBKyEgyy",
+  "ten": "Thành",
+  "ho": "Nguyễn",
+  "ngaySinh": "15/08/2000",
+  "gioiTinh": "nam",
+  "chucvu": "4",
+  "createdAt": {
+    "$date": "2021-12-08T14:34:43.571Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-08T14:34:43.571Z"
+  },
+  "__v": 0
+},{
+  "_id": "Z3jlgmJWf",
+  "email": "teacher",
+  "mk": "$2b$10$uNbERVJ2MgUsXdN/hmrdBuFttkX6WaI8TPbk1Qy.v3/PNJ7ETyd/G",
+  "ten": "Thành",
+  "ho": "Nguyễn",
+  "ngaySinh": "15/08/2000",
+  "gioiTinh": "nam",
+  "chucvu": "3",
+  "createdAt": {
+    "$date": "2021-12-08T14:35:09.016Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-08T14:35:09.016Z"
+  },
+  "__v": 0
+},{
+  "_id": "yuODvg9bq",
+  "email": "admin",
+  "mk": "$2b$10$rhd6qn2CfT4GWqPV3J0yRO3rvlTty7yOYLmHfqjQYmi5EWbMPevcK",
+  "ten": "Thành",
+  "ho": "Nguyễn",
+  "ngaySinh": "15/08/2000",
+  "gioiTinh": "nam",
+  "chucvu": "2",
+  "createdAt": {
+    "$date": "2021-12-08T14:35:27.284Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-08T14:35:27.284Z"
+  },
+  "__v": 0
+}]

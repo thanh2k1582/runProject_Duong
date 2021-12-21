@@ -1,0 +1,39 @@
+{{>silderBar}}
+<div class="main-content">
+  {{>headerAdmin}}
+  <main>
+      <div class="containerLogin" style="position:absolute;top:-20px;left: 80px">
+  <div class="col-2 mt-4 ">
+    <form method="POST" action="/student/{{member._id}}?_method=PUT">
+          <div style="display:flex;margin-bottom:16px">
+            <div>
+                Mã sinh viên: <input type="text" value="{{member.mssv}}" class="p-1 pl-4 " disabled>
+              <div style="margin-top:16px">
+                Thời gian báo cáo: <input type="text" value="{{member.updatedAt}}" class="p-1 pl-4" disabled> 
+              </div>
+            </div>
+            <div style="margin-left:60px">
+              Phòng đăng ký: <input type="text" value="{{member.phongDk}}" class="p-1 pl-4" disabled>
+              <div style="margin-top:16px">
+              Máy đăng ký: <input type="text" value="{{member.mayDk}}" class="p-1 pl-4" disabled>
+              </div>
+            </div> 
+          </div>
+        Vấn đề báo cáo: <input type="text" value="{{member.selectReport}}" class="p-1 pl-4" disabled>
+        <div class="form-group purple-border" style="width:200px;margin-top:16px">
+          <label for="exampleFormControlTextarea4">Nội dung báo cáo:</label>
+          <textarea class="form-control" id="exampleFormControlTextarea4" rows="3" disabled>{{member.textareareport}}</textarea>
+        </div>
+        
+  <a href="/admin/reportStudentManager"  class="btn btn-primary">Tiếp nhận</a>
+    </form>
+  </div>
+
+    </div>
+  </main>
+</div>
+
+
+<script>
+  $('.datepicker').datepicker();
+</script>

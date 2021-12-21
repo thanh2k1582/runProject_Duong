@@ -1,0 +1,23 @@
+<div class="containerLogin" >
+  <div class="col-2 mt-4 ">
+    <form method="POST" action="/student/{{member._id}}?_method=PUT">
+        Mã giảng viên: <input type="text" value="{{member.mssv}}" class="p-1 pl-4 " disabled>
+        Phòng đăng ký: <input type="text" value="{{member.phongDk}}" class="p-1 pl-4" disabled>
+        Sử dụng với mục đích: <input type="text" value="{{member.mucdich}}" class="p-1 pl-4" disabled>
+        Mã lớp học phần: <input type="text" value="{{member.maLHP}}" class="p-1 pl-4" disabled>
+        Thời gian báo cáo: <input type="text" value="{{member.updatedAt}}" class="p-1 pl-4" disabled>
+        Ngày sử dụng: <input type="text" value="{{member.ngaySd}}" class="p-1 pl-4" disabled>
+        Vấn đề báo cáo: <input type="text" value="{{member.selectReport}}" class="p-1 pl-4" disabled>
+        <div class="form-group purple-border">
+          <label for="exampleFormControlTextarea4">Nội dung báo cáo:</label>
+          <textarea class="form-control" id="exampleFormControlTextarea4" rows="3" disabled>{{member.textareareport}}</textarea>
+        </div>
+        
+    </form>
+  </div>
+  <a href="/admin/reportTeacherManager"  class="btn btn-primary">Tiếp nhận</a>
+</div>
+
+<script>
+  $('.datepicker').datepicker();
+</script>
