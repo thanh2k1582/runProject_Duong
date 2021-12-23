@@ -3,6 +3,8 @@ const router = express.Router();
 const adminController = require('../../controllers/adminController/AdminController.js')
 
 router.use('/:id/updateOneTeacher',adminController.updateOneTeacher)
+router.get('/student/:id/delete',adminController.deleteStudent)
+router.get('/teacher/:id/delete',adminController.deleteTeacher)
 router.use('/:id/updateOneStudent',adminController.updateOneStudent)
 router.use('/confirmTeacher',adminController.confirmTeacher)
 router.use('/reportStudentManager/:id',adminController.reportDetailStudent)

@@ -139,7 +139,7 @@ main {
                 <input type="search" placeholder="Search here">
             </div>
             <ul>
-                <li><a href=""  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="las la-user"></span>Tải khoản cá nhân<span></span></a>
+                <li><a href=""  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="las la-user"></span><span class="toData" id="toData"></span></a>
                     <div class="dropdown-menu dropdown-menu-2" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/register" style="color: #659dbd;">Đăng ký tài khoản SV/GV</a>
                         <form method="POST" action="/logout">
@@ -150,3 +150,8 @@ main {
                 </li>
             </ul>
         </header>
+<script>
+  var x = document.cookie.split(';')
+  var y = x[1].replace("mssv=","")
+  document.getElementsByClassName("toData").toData.innerHTML = y
+</script>

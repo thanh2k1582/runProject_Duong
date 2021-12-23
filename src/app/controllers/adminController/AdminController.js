@@ -16,6 +16,17 @@ class AdminController{
             )
             .catch(next)
     }
+    
+    deleteStudent(req,res,next){
+        studentDB.deleteOne({ _id: req.params.id},req.body)
+            .then(()=>res.redirect('back'))
+            .catch(next)
+    }
+    deleteTeacher(req,res,next){
+        teacherDB.deleteOne({ _id: req.params.id},req.body)
+            .then(()=>res.redirect('back'))
+            .catch(next)
+    }
     updateOneStudent(req,res,next){
         studentDB.findById(req.params.id)
             .then(
