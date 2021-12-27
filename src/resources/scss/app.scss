@@ -29,7 +29,7 @@ h1{
 }
 
 .sidebar{
-    width: 345px;
+    width: 290px !important;
     position: fixed;
     height: 100%;
     background: var(--main-color);
@@ -72,7 +72,7 @@ h1{
     padding-right: 1rem;
 }
 .main-content{
-    margin-left: 345px;
+    margin-left: 290px !important;
 }
 header{
     display: flex;
@@ -80,8 +80,8 @@ header{
     padding: 1rem 1.5rem;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.2) ;
     position: fixed;
-    left: 345px;
-    width: calc(100% - 345px);
+    left: 290px !important;
+    width: calc(100% - 290px) !important;
     top: 0;
     z-index: 100;
 }
@@ -129,7 +129,7 @@ header label span{
 main{
     margin-top: 85px;
     padding: 2rem 1.5rem;
-    background:#f1f5f9;
+    background:#ffffff;
     min-height: calc(100vh - 90px);
 }
 .dropdown-menu-2{

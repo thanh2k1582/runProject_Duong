@@ -8,5 +8,6 @@ router.use('/newRegister',teacherController.newRegister)
 router.use('/:id/edit',teacherController.edit)
 router.get('/:id/delete',teacherController.delete)
 router.put('/:id',teacherController.update)
+router.use('/history',teacherController.history)
 router.use('/',teacherController.index)
 module.exports =router

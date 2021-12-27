@@ -13,6 +13,17 @@ class StudentController{
             .catch(next)
 
     }
+    history(req,res,next){
+        teacherDB.find({userID: req.cookies.userID,tinhTrang: "Đã duyệt"})
+            .then(member => res.render('teacher/teacherManager',{		
+                member : mutipleMongooseToObject(member),   
+                helpers:{
+                    sum : (a,b) => a+b,
+                }						
+            }))
+            .catch(next)
+
+    }
     newRegister(req,res){
         res.render('teacher/teacherRegis')
     }
@@ -45,9 +56,23 @@ class StudentController{
         res.render('teacher/teacherRegis')
     }
     store(req,res){
+        let d = new Date();
+        let year = d.getFullYear();
+        let month = d.getMonth() + 1;
+        let day = d.getDate();
+        let dayofweek = d.getDay();
+        let hours = d.getHours();
+        let minutes = d.getMinutes();
+        let seconds = d.getSeconds();
+
+        const dayname = ['CN','T2','T3','T4','T5','T6','T7'];
+        var stringTimeHour =`${hours}giờ-${minutes}phút-${seconds}giây`
+        var stringTimeYear = `${dayname[dayofweek]} ngày ${day}-${month}-${year}`
         const member = new teacherDB(req.body)
         member["userID"] = req.cookies.userID
         member["mssv"] = req.cookies.mssv
+        member["createTimeHour"] = stringTimeHour
+        member["createTimeYear"] = stringTimeYear
         console.log("đây là member:" + member)
         member.save()
             .then(()=>res.redirect('/teacher')) //quay về trang chủ

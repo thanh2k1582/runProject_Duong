@@ -8,5 +8,6 @@ router.post('/:id/report',studentController.report)
 router.use('/:id/edit',studentController.edit)
 router.get('/:id/delete',studentController.delete)
 router.put('/:id',studentController.update)
+router.use('/history',studentController.history)
 router.use('/',authMiddleware,studentController.index)
 module.exports =router

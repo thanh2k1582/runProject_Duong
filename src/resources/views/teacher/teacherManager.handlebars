@@ -1,8 +1,11 @@
-{{>silderBarSV_GV}}
+<div>
+  {{>silderBarSV_GV}}
 <div class="main-content">
   {{>header}}
   <main>
-      <table class="table">
+<a  class="btn btn-primary" href="/teacher">Trang chủ</a>
+  <div style="min-height :520px;">
+    <table class="table">
   <thead>
     <tr>
       <th scope="col">STT</th>
@@ -22,7 +25,7 @@
       <th scope="row">{{sum @index 1}}</th>
       <td>{{this.maLHP}}</td>
       <td>{{this.phongDk}}</td>
-      <td>{{this.createdAt}}</td>
+      <td>{{this.createTimeHour}}<br>{{this.createTimeYear}}</td>
       <td>{{this.ngaySd}}</td>
       <td>{{this.tuTiet}} - {{this.denTiet}}</td>
       <td>{{this.mucdich}}</td>
@@ -35,8 +38,14 @@
   </tbody>
 </table>
 <a  class="btn btn-primary" href="/teacher/newRegister">Đăng ký mới</a>
+<a  class="btn btn-primary" href="/teacher/history">Lịch sử duyệt máy</a>
+  </div>
+  {{>footer}}
 
   </main>
+</div>
+</div>
+<div>
 </div>
 
 

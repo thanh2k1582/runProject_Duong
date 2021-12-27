@@ -1,12 +1,34 @@
-<div class="containerLogin" >
+{{>silderBar}}
+<div class="main-content">
+  {{>headerAdmin}}
+  <main>
+    <div style="min-height :540px;">
+      <div class="containerLogin" style="position:absolute;top:-60px;left: -120px" >
   <div class="col-2 mt-4 ">
     <form method="POST" action="/student/{{member._id}}?_method=PUT">
-        Mã giảng viên: <input type="text" value="{{member.mssv}}" class="p-1 pl-4 " disabled>
-        Phòng đăng ký: <input type="text" value="{{member.phongDk}}" class="p-1 pl-4" disabled>
-        Sử dụng với mục đích: <input type="text" value="{{member.mucdich}}" class="p-1 pl-4" disabled>
-        Mã lớp học phần: <input type="text" value="{{member.maLHP}}" class="p-1 pl-4" disabled>
-        Thời gian báo cáo: <input type="text" value="{{member.updatedAt}}" class="p-1 pl-4" disabled>
-        Ngày sử dụng: <input type="text" value="{{member.ngaySd}}" class="p-1 pl-4" disabled>
+      <div style="display:flex;margin-bottom:16px">
+            <div>
+                Mã giảng viên: <input type="text" value="{{member.mssv}}" class="p-1 pl-4 " disabled>
+              <div style="margin-top:16px">
+                Thời gian báo cáo: <input type="text" value="{{member.updatedAt}}" class="p-1 pl-4" disabled>
+              </div>
+            </div>
+            <div style="margin-left:60px">
+              Phòng đăng ký: <input type="text" value="{{member.phongDk}}" class="p-1 pl-4" disabled>
+              <div style="margin-top:16px">
+              Sử dụng với mục đích: <input type="text" value="{{member.mucdich}}" class="p-1 pl-4" disabled>
+              </div>
+            </div> 
+            <div style="margin-left:60px">
+              Mã lớp học phần: <input type="text" value="{{member.maLHP}}" class="p-1 pl-4" disabled>
+              <div style="margin-top:16px">
+              Ngày sử dụng: <input type="text" value="{{member.ngaySd}}" class="p-1 pl-4" disabled>
+              </div>
+            </div> 
+          </div>
+        
+        
+        
         Vấn đề báo cáo: <input type="text" value="{{member.selectReport}}" class="p-1 pl-4" disabled>
         <div class="form-group purple-border">
           <label for="exampleFormControlTextarea4">Nội dung báo cáo:</label>
@@ -15,8 +37,15 @@
         
     </form>
   </div>
-  <a href="/admin/reportTeacherManager"  class="btn btn-primary">Tiếp nhận</a>
+  <a href="/admin/reportTeacherManager"  class="btn btn-primary" style="position:absolute;bottom: 140px;">Tiếp nhận</a>
 </div>
+    </div>
+    {{>footer}}
+  </main>
+</div>
+
+
+
 
 <script>
   $('.datepicker').datepicker();

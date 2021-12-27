@@ -9,6 +9,8 @@ const studentRegis = new Schema({
     ngaySd: { type: String, default: 'hahaha' },
     tuTiet: { type: String, default: 'hahaha' },
     denTiet: { type: String, default: 'hahaha' },
+    createTimeHour: { type: String, default: 'hahaha' },
+    createTimeYear: { type: String, default: 'hahaha' },
     selectReport: { type: String},
     textareareport: { type: String },
     tinhTrang: { type: String, default: 'Chưa duyệt' },

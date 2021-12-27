@@ -2,7 +2,8 @@
 <div class="main-content">
   {{>header}}
   <main>
-     <div class="containerLogin" style="position:absolute;left:150px;top:-120px">
+     <div style="min-height :540px;">
+       <div class="containerLogin" style="position:absolute;left:150px;top:-120px">
   <div class="col-2 mt-4 ">
     <form method="POST" action="/teacher/{{member._id}}?_method=PUT">
     <div style="display:flex;width:600px;margin-bottom:20px">
@@ -76,6 +77,8 @@
     </form>
   </div>
 </div>
+     </div>
+     {{>footer}}
   </main>
 </div>
 
