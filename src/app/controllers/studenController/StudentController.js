@@ -2,8 +2,16 @@ const {mutipleMongooseToObject} = require('../../../util/mongoose.js')
 const {mongooseToObject} = require('../../../util/mongoose.js')					
 const studentDB = require('../../model/studentDB.js')
 class StudentController{
+    filter(req,res,next){
+        let payload = req.body.payload
+        let search = studentDB.find({userID: req.cookies.userID , chucvu : req.cookies.chucvu,phongDk: payload})
+        res.send('student/studentFilter')
+        
+    }
     index(req,res,next){
-        studentDB.find({userID: req.cookies.userID , chucvu : req.cookies.chucvu})
+        let payload = req.body.payload
+        if(payload === undefined){
+            studentDB.find({userID: req.cookies.userID , chucvu : req.cookies.chucvu})
             .then(member => res.render('student/studentManager',{		
                 member : mutipleMongooseToObject(member),
                 helpers:{
@@ -11,6 +19,11 @@ class StudentController{
                 }						
             }))
             .catch(next)
+        }
+        else{
+           
+        }
+        
 
     }
     history(req,res,next){
@@ -54,7 +67,32 @@ class StudentController{
             .catch(next)
         res.render('student/studentRegis')
     }
+    async registerCheck(req,res,next){
+        let regexCheck = await studentDB.find({ngaySd: req.body.ngaySd,phongDk: req.body.phongDk,mayDk:req.body.mayDk})
+        var data = ""
+        regexCheck.forEach((item,index)=>{
+            var tuTietBody = parseInt(req.body.tuTiet)
+            var tuTietItem = parseInt(item.tuTiet)
+            var denTietBody = parseInt(req.body.denTiet)
+            var denTietItem = parseInt(item.denTiet)
+            if((tuTietBody <= tuTietItem && denTietBody >= tuTietItem) || (tuTietBody <= denTietItem && denTietBody >= denTietItem)){
+                data = item 
+            }
+            if((tuTietBody >= tuTietItem && denTietBody <= denTietItem) ){
+                data = item 
+            }
+            if((tuTietBody > denTietItem && denTietBody > denTietItem) || (tuTietBody < tuTietItem && denTietBody < tuTietItem)){
+                data = ""
+            }
+        })
+        console.log([data])
+        res.send({data: [data]})
+    }
+    
     store(req,res){
+        // studentDB.find({phongDk:req.body.phongDk,mayDk:req.body.mayDk,ngaySd:req.body.ngaySd})
+        // .then(member => )
+
         let d = new Date();
         let year = d.getFullYear();
         let month = d.getMonth() + 1;

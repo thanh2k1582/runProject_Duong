@@ -1,0 +1,209 @@
+{{>silderBar}}
+<div class="main-content">
+  {{>headerAdmin}}
+  <main>
+    <div style="min-height :540px;">
+      <select class="browser-default custom-select" name="filter" id="postClass" style="width:200px">
+                <option selected>Thống kê theo</option>
+                <option value="Ngày">Ngày</option>
+                <option value="Tháng">Tháng</option>
+                <option value="Tuần của tháng">Tuần của tháng</option>
+                <option value="Khoảng thời gian">Khoảng thời gian</option>
+              </select>
+              <p></p>
+      <select class="browser-default custom-select" name="phongDk" id="postClass2" style="width:200px ">
+                <option selected>Chọn phòng </option>
+                <option value="B101">B101</option>
+                <option value="B102">B102</option>
+                <option value="B103">B103</option>
+                <option value="B104">B104</option>
+                <option value="B201">B201</option>
+                <option value="B202">B202</option>
+                <option value="B203">B203</option>
+                <option value="B204">B204</option>
+                <option value="B301">B301</option>
+                <option value="B302">B302</option>
+                <option value="B303">B303</option>
+                <option value="B304">B304</option>
+                <option value="Tất cả">Tất cả</option>
+              </select>
+      <div style="display:flex;margin-top:30px" id="selectDate">
+         
+      </div>
+      <p style="margin-top:20px">Kết quả có: <span id="dataSpan">  </span></p>
+      <script>
+        function myFunction(){
+          document.getElementById("dayTest").innerHTML = ``
+          var val = document.getElementById("daySelect").value
+          if(/(\d+-)+\d{4}/g.test(val) == true){
+            var val2 = document.getElementById("postClass2").value
+            if(val2 == "Chọn phòng"){
+              document.getElementById("dayTest").innerHTML = `Vui lòng chọn phòng`
+              return
+            }
+            fetch('statisticsFilter',{
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json'},
+              body: JSON.stringify({ngayLoc: val,phongDk:val2}) 
+            }).then(res => res.json()).then(data =>{
+              var teacher = data.teacher
+              var student = data.student
+              document.getElementById("dataSpan").innerHTML = `<b>${student}</b> sinh viên và <b>${teacher} </b> giảng viên đăng ký máy tại phòng ${val2}`
+            })
+            
+          }
+          else{
+            document.getElementById("dayTest").innerHTML = `Không đúng định dạng dd-mm-yyyy`
+          }
+        }
+        function myFunctionChange(){
+            var val = document.getElementById("month").value
+            var val2 = document.getElementById("postClass2").value
+            if(val2 == "Chọn phòng"){
+              document.getElementById("dayTest").innerHTML = `Vui lòng chọn phòng`
+              return
+            }
+            if(val == "Chọn tháng"){
+              document.getElementById("dayTest").innerHTML = `Vui lòng chọn tháng`
+              return
+            }
+            fetch('statisticsFilterMonth',{
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json'},
+              body: JSON.stringify({thangLoc: val,phongDk:val2}) 
+            }).then(res => res.json()).then(data => {
+               document.getElementById("dataSpan").innerHTML = `<b>${data.student}</b> sinh viên và <b>${data.teacher} </b> giảng viên đăng ký máy tại phòng ${val2} trong tháng ${val}`
+            })
+        }
+        function myFunctionWeekMonth(){
+            var val = document.getElementById("month").value
+            var valweek = document.getElementById("week").value
+            var val2 = document.getElementById("postClass2").value
+            if(val == "Tháng"){
+              document.getElementById("dayTest").innerHTML = `Vui lòng chọn tháng`
+              return
+            }
+            if(valweek == "Tuần"){
+              document.getElementById("dayTest").innerHTML = `Vui lòng chọn tuần`
+              return
+            }
+            if(val2 == "Chọn phòng"){
+              document.getElementById("dayTest").innerHTML = `Vui lòng chọn phòng`
+              return
+            }
+            document.getElementById("dayTest").innerHTML = ``
+            fetch('statisticsFilterMonthWeek',{
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json'},
+              body: JSON.stringify({thangLoc: val,tuanLoc: valweek,phongDk:val2}) 
+            }).then(res => res.json()).then(data => {
+               document.getElementById("dataSpan").innerHTML = `<b>${data.student}</b> sinh viên và <b>${data.teacher} </b> giảng viên đăng ký máy tại phòng ${val2} trong tuần ${valweek} tháng ${val}`
+            })
+        }
+        function myFunctionFromTo(){
+          document.getElementById("dayTest").innerHTML = ``
+          var val2 = document.getElementById("postClass2").value
+          var valFrom = document.getElementById("FromInput").value
+          var valTo = document.getElementById("ToInput").value
+          if(/(\d+-)+\d{4}/g.test(valFrom) == false){
+            document.getElementById("dayTest").innerHTML = `Ngày bắt đầu hông đúng định dạng dd-mm-yyyy`
+            return
+          }
+          var val2 = document.getElementById("postClass2").value
+          if(val2 == "Chọn phòng"){
+            document.getElementById("dayTest").innerHTML = `Vui lòng chọn phòng`
+            return
+          }
+          if(/(\d+-)+\d{4}/g.test(valTo) == false){
+            document.getElementById("dayTest").innerHTML = `Ngày kết thúc không đúng định dạng dd-mm-yyyy`
+            return
+          }
+          document.getElementById("dayTest").innerHTML = ``
+          fetch('statisticsFilterFromTo',{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ngaybatdau: valFrom,ngayketthuc:valTo,phongDk:val2})
+          }).then(res => res.json()).then(data => {
+               document.getElementById("dataSpan").innerHTML = `<b>${data.student}</b> sinh viên và <b>${data.teacher} </b> giảng viên đăng ký máy tại phòng ${val2} từ ngày ${valFrom} đến ngày ${valTo}`
+            })
+        }
+
+        $("#postClass").change(function(){
+          var val = $("#postClass").val()
+          if(val == "Khoảng thời gian"){
+            $("#dataSpan").html(``)
+             $("#selectDate").html(`
+                  <input placeholder="Ngày bắt đầu" type="text" id="FromInput" class="form-control mb-4" name="ngaySd" style="width:168px"
+                  onkeyup="myFunctionFromTo()">
+                  <input placeholder="Ngày kết thúc" type="text" id="ToInput" class="form-control mb-4" name="ngaySd" style="width:168px;margin-left:20px" onkeyup="myFunctionFromTo()" >
+                  <p id="dayTest" style="margin-left:20px"></p>
+             `)
+            $("#postClass2").attr("onchange","myFunctionFromTo()")
+          }
+          if(val == "Ngày"){
+            $("#dataSpan").html(``)
+            $("#selectDate").html(`<input placeholder="Nhập ngày cần thống kê" type="text" id="daySelect" class="form-control mb-4" name="ngaySd" style="width:240px" onkeyup="myFunction()">
+              <p id="dayTest" style="margin-left:20px"></p>
+            `)
+            $("#postClass2").attr("onchange","myFunction()")
+          }
+          if(val == "Tháng"){
+            $("#dataSpan").html(``)
+            $("#selectDate").html(`
+               
+                <select class="browser-default custom-select" name="phongDk" id="month" style="width:200px" onchange="myFunctionChange()">
+                <option selected>Chọn tháng</option>
+                <option value="01">Tháng 1</option>
+                <option value="02">Tháng 2</option>
+                <option value="03">Tháng 3</option>
+                <option value="04">Tháng 4</option>
+                <option value="05">Tháng 5</option>
+                <option value="06">Tháng 6</option>
+                <option value="07">Tháng 7</option>
+                <option value="08">Tháng 8</option>
+                <option value="09">Tháng 9</option>
+                <option value="10">Tháng 10</option>
+                <option value="11">Tháng 11</option>
+                <option value="12">Tháng 12</option>
+              </select>
+               <div style="margin-left:10px">
+                <p id="dayTest"></p> 
+                </div>
+            `)
+            $("#postClass2").attr("onchange","myFunctionChange()")
+          }
+          if(val == "Tuần của tháng"){
+            $("#dataSpan").html(``)
+            $("#selectDate").html(`
+              <select class="browser-default custom-select" name="phongDk" id="week" style="width:100px " onchange="myFunctionWeekMonth()">
+                  <option selected>Tuần</option>
+                  <option value="1">Tuần 1</option>
+                  <option value="2">Tuần 2</option>
+                  <option value="3">Tuần 3</option>
+                  <option value="4">Tuần 4</option>
+                </select>
+                <select class="browser-default custom-select" name="phongDk" id="month" style="width:200px;margin-left:10px " onchange="myFunctionWeekMonth()">
+                <option selected>Tháng</option>
+                <option value="01">Tháng 1</option>
+                <option value="02">Tháng 2</option>
+                <option value="03">Tháng 3</option>
+                <option value="04">Tháng 4</option>
+                <option value="05">Tháng 5</option>
+                <option value="06">Tháng 6</option>
+                <option value="07">Tháng 7</option>
+                <option value="08">Tháng 8</option>
+                <option value="09">Tháng 9</option>
+                <option value="10">Tháng 10</option>
+                <option value="11">Tháng 11</option>
+                <option value="12">Tháng 12</option>
+              </select>
+              <p id="dayTest" style="margin-left:20px"></p>
+            `)
+            $("#postClass2").attr("onchange","myFunctionWeekMonth()")
+          }
+        })
+      </script>
+</div>{{>footer}}
+  </main>
+</div>
+

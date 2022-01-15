@@ -3,6 +3,7 @@ const router = express.Router();
 const studentController = require('../../controllers/studenController/StudentController.js')
 var authMiddleware = require('../../../middleware/loginMiddleware.js')
 router.post('/newRegister',studentController.store)
+router.post('/registerCheck',studentController.registerCheck)
 router.use('/newRegister',studentController.newRegister)
 router.post('/:id/report',studentController.report)
 router.use('/:id/edit',studentController.edit)

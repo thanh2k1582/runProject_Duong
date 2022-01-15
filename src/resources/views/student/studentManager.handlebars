@@ -3,6 +3,8 @@
   {{>header}}
   <main>
 <a  class="btn btn-primary" href="student">Trang quản lý</a>
+<div style="display:flex">
+</div>
       <div style="min-height :500px;">
         <table class="table">
   <thead>
@@ -43,8 +45,6 @@
   {{>footer}}
   </main>
 </div>
-
-
 {{!-- modal xóa--}}
 <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
   <div class="modal-dialog" role="document">
@@ -99,9 +99,20 @@
   </div>
 </div>
 </form>
-
 {{!-- end modal báo cáo --}}
 <form  method="POST" name="deleteForm"></form>
+<script>
+    $(document).ready(function(){
+    $("#selectionPhong").change(function(){
+        var selectedCountry = $(this).children("option:selected").val();
+        fetch('student/filter', {
+                    method: 'POST'
+                    , headers: { 'Content-Type': 'application/json' }
+                    , body: JSON.stringify({ payload: selectedCountry})
+        })
+    });
+});
+</script>
 <script>
   document.addEventListener("DOMContentLoaded",function(){
       var memberId;

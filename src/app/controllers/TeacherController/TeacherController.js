@@ -55,6 +55,20 @@ class StudentController{
             .catch(next)
         res.render('teacher/teacherRegis')
     }
+    async RegisterCheck(req,res,next){
+        let paypoad = req.body
+        let x = await teacherDB.find({phongDk: req.body.phongDk,ngaySd: req.body.ngaySd})
+        let y = []
+        x.forEach((item,index)=>{
+            if((parseInt(req.body.tuTiet) >= parseInt(item.tuTiet) && parseInt(req.body.tuTiet) <= parseInt(item.denTiet)) || (parseInt(req.body.denTiet) >= parseInt(item.tuTiet) && parseInt(req.body.denTiet) <= parseInt(item.denTiet))){
+                y = [item]
+            }
+            if((parseInt(req.body.tuTiet) <= parseInt(item.tuTiet) && parseInt(req.body.denTiet) >= parseInt(item.denTiet))){
+                y = [item]
+            }
+        })
+        res.send(y)
+    }
     store(req,res){
         let d = new Date();
         let year = d.getFullYear();

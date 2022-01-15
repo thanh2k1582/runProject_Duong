@@ -8,13 +8,13 @@
     <form method="POST" >
       <div style="display:flex;width:900px;margin-bottom:20px">
         <div style="width:250px;padding-top:24px">
-              <select class="browser-default custom-select mb-4" name="mucdich">
+              <select class="browser-default custom-select mb-4" name="mucdich" id="purpose">
                 <option selected>Mục đích </option>
                 <option value="Học bù">Học bù</option>
                 <option value="Kiểm tra">Kiểm tra</option>
                 <option value="Khác">Khác</option>
               </select>
-              <select class="browser-default custom-select" name="phongDk">
+              <select class="browser-default custom-select" name="phongDk" id="phongDk">
                 <option selected>Chọn phòng </option>
                 <option value="B101">B101</option>
                 <option value="B102">B102</option>
@@ -29,7 +29,7 @@
                 <option value="B303">B303</option>
                 <option value="B304">B304</option>
               </select>
-              <select class="browser-default custom-select mt-4" name="maLHP">
+              <select class="browser-default custom-select mt-4" name="maLHP" id="lopHp">
                 <option selected>Mã lớp học phần</option>
                 <option value="18T1">18T1</option>
                 <option value="18T2">18T2</option>
@@ -38,41 +38,44 @@
               </select>
         </div>
         <div style="width:250px;margin-left:40px">
-              <select class="browser-default custom-select mt-4" name="tuTiet">
+              <select class="browser-default custom-select mt-4" name="tuTiet" id="tuTiet">
                 <option selected>Từ tiết</option>
                 <option value="1">Tiết 1</option>
                 <option value="2">Tiết 2</option>
                 <option value="3">Tiết 3</option>
-                <option value="3">Tiết 4</option>
-                <option value="3">Tiết 5</option>
-                <option value="3">Tiết 6</option>
-                <option value="3">Tiết 7</option>
-                <option value="3">Tiết 8</option>
-                <option value="3">Tiết 9</option>
+                <option value="4">Tiết 4</option>
+                <option value="5">Tiết 5</option>
+                <option value="6">Tiết 6</option>
+                <option value="7">Tiết 7</option>
+                <option value="8">Tiết 8</option>
+                <option value="9">Tiết 9</option>
               </select>
-              <select class="browser-default custom-select mt-4" name="denTiet">
+              <select class="browser-default custom-select mt-4" name="denTiet" id="denTiet">
                 <option selected>Đến tiết</option>
                 <option value="2">Tiết 2</option>
                 <option value="3">Tiết 3</option>
-                <option value="3">Tiết 4</option>
-                <option value="3">Tiết 5</option>
-                <option value="3">Tiết 6</option>
-                <option value="3">Tiết 7</option>
-                <option value="3">Tiết 8</option>
-                <option value="3">Tiết 9</option>
-                <option value="3">Tiết 10</option>
+                <option value="4">Tiết 4</option>
+                <option value="5">Tiết 5</option>
+                <option value="6">Tiết 6</option>
+                <option value="7">Tiết 7</option>
+                <option value="8">Tiết 8</option>
+                <option value="9">Tiết 9</option>
+                <option value="10">Tiết 10</option>
               </select>
         </div>
         <div style="width:250px;margin-left:40px">
         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker mt-4">
-          <input placeholder="Ngày sử dụng" type="text" id="example" class="form-control mb-4" name="ngaySd">
+          <input placeholder="Ngày sử dụng" type="text" id="example" class="form-control mb-4 ngaySd" name="ngaySd" >
           <i class="fas fa-calendar input-prefix" tabindex=0></i>
+          <p id="testDatetime" style="width:500px"></p>
         </div>
-          <input placeholder="Số lượng sinh viên" type="text" id="example" class="form-control mb-4" name="soSV">
+          <input placeholder="Số lượng sinh viên" type="text" id="example" class="form-control mb-4 soSV" name="soSV">
           </div>
           </div>
+        <p id="teacherCheckRegis" style="width:700px"></p>
+          <p id="testDatetime"></p>
         <a href="taoMoi">
-          <button type="submit" class="btn btn-primary ml-4" href="/teacher/newRegister">Đăng ký</button>
+          <button type="submit" class="btn btn-primary ml-4 disable" href="/teacher/newRegister" disabled>Đăng ký</button>
         </a>
     </form>
   </div>
@@ -81,8 +84,64 @@
      {{>footer}}
   </main>
 </div>
-
-
 <script>
-  $('.datepicker').datepicker();
+  $.fn.myFunction = function() {
+      var purpose = $("#purpose").val();
+        var classRegister = $("#phongDk").val();
+        var tietHocFrom = $("#tuTiet").val();
+        var tietHocTo = $("#denTiet").val();
+        var lopHp = $("#lopHp").val();  
+        var ngaySd =  $(".ngaySd").val();
+        var soLuong = $(".soSV").val();
+      if(purpose == "Mục đích" || classRegister == "Chọn phòng"){
+        return;
+      }
+      if(tietHocFrom == "Từ tiết" || tietHocTo == "Đến tiết"){
+        return;
+      }
+      if(ngaySd == ""||soLuong == "" || lopHp =="Mã lớp học phần" ){
+        return;
+      }
+      fetch('RegisterCheck',{
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({phongDk: classRegister,tuTiet: tietHocFrom,denTiet:tietHocTo,ngaySd: ngaySd})
+      }).then(res => res.json()).then(data=>{
+          if(data.length > 0){
+            console.log(data)
+            $("#teacherCheckRegis").html(`Phòng ${classRegister} ngày ${ngaySd} từ ${tietHocFrom} đến ${tietHocTo} đã có người sử dụng từ tiết ${data[0].tuTiet} đến tiết ${data[0].denTiet}`)
+            $(".disable").prop("disabled",true)
+            return
+          }
+          $("#teacherCheckRegis").html(``)
+          $(".disable").prop("disabled",false)
+      })
+  }
+  $("#purpose").change(function(){
+        $.fn.myFunction()
+  })
+  $("#phongDk").change(function(){
+        $.fn.myFunction()
+  })
+  $("#tuTiet").change(function(){
+        $.fn.myFunction()
+  })
+  $("#denTiet").change(function(){
+        $.fn.myFunction()
+  })
+  $("#lopHp").change(function(){
+        $.fn.myFunction()
+  })
+  $(".ngaySd").change(function(){
+      if(/(\d+-)+\d{4}/g.test($("#example").val()) == true){
+              $("#testDatetime").html("")
+              $.fn.myFunction()
+            }
+            else{
+              $("#testDatetime").html("Chưa đúng định dạng dd-mm-yyyy")
+            }
+  })
+  $(".soSV").change(function(){
+        $.fn.myFunction()
+  })
 </script>
